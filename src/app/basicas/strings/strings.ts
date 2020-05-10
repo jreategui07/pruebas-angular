@@ -1,3 +1,3 @@
-export function saludar(nombre: string): string {
-  return `Hola ${nombre}`;
+export function saludar(nombre: string) {
+    return `Hola ${nombre}`;
 }
