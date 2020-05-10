@@ -7,4 +7,9 @@ describe('Pruebas de booleanos', () => {
     expect(resp).toBeTrue();
   });
 
+  it('No debe ser falso', () => {
+    const resp = usuarioIngresado();
+    expect(resp).not.toBeFalsy();
+  });
+
 });
