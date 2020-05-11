@@ -1,6 +1,6 @@
 import { MedicosComponent } from './medicos.component';
 import { MedicosService } from './medicos.service';
-import { from } from 'rxjs';
+import { from, empty } from 'rxjs';
 
 describe('MedicosComponent', () => {
 
@@ -17,6 +17,15 @@ describe('MedicosComponent', () => {
     });
     componente.ngOnInit();
     expect(componente.medicos.length).toBeGreaterThan(0);
+  });
+
+  it('agregarMedico: Se debe llamar al servidor para agregar un médido', () => {
+    const espia = spyOn(servicio, 'agregarMedico').and.callFake(() => {
+      // tslint:disable-next-line: deprecation
+      return empty();
+    });
+    componente.agregarMedico();
+    expect(espia).toHaveBeenCalled();
   });
 
 });
