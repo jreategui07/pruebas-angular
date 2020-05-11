@@ -26,4 +26,23 @@ describe('Pruebas de EventEmiter', () => {
        expect(nuevoHp).toBe(50);
     });
 
+    it('Debe emitir un saludo con el nombre proporcionado', () => {
+        let saludo = '';
+        jugador.saludo.subscribe(resp => {
+            saludo = resp;
+        });
+        const nombre = 'Jonathan';
+        jugador.saludar(nombre);
+        expect(saludo).toContain(nombre);
+    });
+
+    it('Debe emitir un evento con el poder principal', () => {
+        let poderPrincipal = '';
+        jugador.poderPrincipal.subscribe(resp => {
+            poderPrincipal = resp;
+        });
+        jugador.obtenerProderPrincipal();
+        expect(poderPrincipal).toBe('aire');
+    });
+
 });
