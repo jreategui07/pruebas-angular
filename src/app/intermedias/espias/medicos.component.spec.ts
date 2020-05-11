@@ -46,4 +46,20 @@ describe('MedicosComponent', () => {
     expect(componente.mensajeError).toBe(mensajeError);
   });
 
+  it('borrarMedico: Debe de llamar al servidor para borrar un médico', () => {
+    spyOn(window, 'confirm').and.returnValue(true);
+    // tslint:disable-next-line: deprecation
+    const espia = spyOn(servicio, 'borrarMedico').and.returnValue(empty());
+    componente.borrarMedico('1');
+    expect(espia).toHaveBeenCalledWith('1');
+  });
+
+  it('borrarMedico: NO debe de llamar al servidor para borrar un médico', () => {
+    spyOn(window, 'confirm').and.returnValue(false);
+    // tslint:disable-next-line: deprecation
+    const espia = spyOn(servicio, 'borrarMedico').and.returnValue(empty());
+    componente.borrarMedico('1');
+    expect(espia).not.toHaveBeenCalledWith('1');
+  });
+
 });
