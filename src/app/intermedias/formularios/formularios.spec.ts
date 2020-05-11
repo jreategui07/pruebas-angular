@@ -13,4 +13,22 @@ describe('Pruebas de formularios', () => {
     expect(componente.form.contains('password')).toBeTrue();
   });
 
+  it('El email debe ser obligatorio', () => {
+    const control = componente.email;
+    control.setValue('');
+    expect(control.valid).toBeFalse();
+  });
+
+  it('El email debe ser un correo válido', () => {
+    const control = componente.email;
+    control.setValue('jonathan@gmail.com');
+    expect(control.valid).toBeTruthy();
+  });
+
+  it('El password es obligatorio', () => {
+    const control = componente.password;
+    control.setValue('');
+    expect(control.valid).toBeFalsy();
+  });
+
 });
