@@ -13,11 +13,10 @@ describe('MedicosComponent', () => {
 
   it('Init: Se deben cargar los médicos', () => {
     spyOn(servicio, 'getMedicos').and.callFake(() => {
-      return from([ 'medico1', 'medico2', 'medico3' ]);
+      return from(['medico1', 'medico2', 'medico3']);
     });
     componente.ngOnInit();
     expect(componente.medicos.length).toBeGreaterThan(0);
   });
-
 
 });
