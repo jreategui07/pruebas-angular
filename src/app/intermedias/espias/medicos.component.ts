@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicosService } from './medicos.service';
+import { IMedicoObs } from './medicos.interface';
 
 @Component({
   selector: 'app-medicos',
@@ -38,6 +39,15 @@ export class MedicosComponent implements OnInit {
     if (confirmar) {
       this.medicoService.borrarMedico(id);
     }
+  }
+
+  obtenerMedicosObs() {
+    this.medicoService.getMedicosObs().subscribe(
+      (resp: IMedicoObs[]) => {
+        this.medicos = resp;
+      },
+      err => this.mensajeError = err
+    );
   }
 
 }

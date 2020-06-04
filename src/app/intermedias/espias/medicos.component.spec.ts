@@ -1,6 +1,7 @@
 import { MedicosComponent } from './medicos.component';
 import { MedicosService } from './medicos.service';
-import { from, empty, throwError } from 'rxjs';
+import { from, empty, throwError, Observable } from 'rxjs';
+import { IMedicoObs } from './medicos.interface';
 
 describe('MedicosComponent', () => {
 
@@ -61,5 +62,88 @@ describe('MedicosComponent', () => {
     componente.borrarMedico('1');
     expect(espia).not.toHaveBeenCalledWith('1');
   });
+
+  it('getMedicosObs___returnValue___: Se deben obtener medicos', () => {
+    const fakeResp = [
+      {
+        id: 1,
+        nombre: 'Jonathan',
+        especialidad: 'Cardiología'
+      },
+      {
+        id: 2,
+        nombre: 'María',
+        especialidad: 'Pediatría'
+      }
+    ];
+    const observable = new Observable<IMedicoObs[]>(subscriber => {
+      subscriber.next(fakeResp);
+    });
+    spyOn(servicio, 'getMedicosObs').and.returnValue(
+      observable
+    );
+    componente.obtenerMedicosObs();
+    expect(componente.medicos.length).toBeGreaterThan(0);
+  });
+
+  /*
+    Pruebas de subscripción a servicio usando returnValue
+  */
+
+  it('getMedicosObs_error___returnValue___: Se debe actualizar el mensaje error si el servicio falla', () => {
+    const fakeError = 'Ha ocurrido un error';
+    const observable = new Observable<any>(subscriber => {
+      throw(fakeError);
+    });
+    spyOn(servicio, 'getMedicosObs').and.returnValue(
+      observable
+    );
+    componente.obtenerMedicosObs();
+    expect(componente.mensajeError).toBe(fakeError);
+  });
+
+  /*
+    Fin de pruebas de subscripción a servicio usando returnValue
+  */
+
+  /*
+    Pruebas de subscripción a servicio usando callFake
+  */
+
+  it('getMedicosObs___callFake___: Se deben obtener medicos', () => {
+    const fakeResp = [
+      {
+        id: 1,
+        nombre: 'Jonathan',
+        especialidad: 'Cardiología'
+      },
+      {
+        id: 2,
+        nombre: 'María',
+        especialidad: 'Pediatría'
+      }
+    ];
+    const observable = new Observable<IMedicoObs[]>(subscriber => {
+      subscriber.next(fakeResp);
+    });
+    spyOn(servicio, 'getMedicosObs').and.callFake(() => {
+      return observable;
+    });
+    componente.obtenerMedicosObs();
+    expect(componente.medicos.length).toBeGreaterThan(0);
+  });
+
+  it('getMedicosObs_error___callFake___: Se debe actualizar el mensaje error si el servicio falla', () => {
+    const fakeError = 'Ha ocurrido un error';
+    spyOn(servicio, 'getMedicosObs').and.callFake(() => {
+      return throwError(fakeError);
+    });
+    componente.obtenerMedicosObs();
+    expect(componente.mensajeError).toBe(fakeError);
+  });
+
+  /*
+    Fin de subscripción a servicio usando callFake
+  */
 
 });
