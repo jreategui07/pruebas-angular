@@ -63,6 +63,10 @@ describe('MedicosComponent', () => {
     expect(espia).not.toHaveBeenCalledWith('1');
   });
 
+  /*
+    Pruebas de subscripción a servicio usando returnValue
+  */
+
   it('getMedicosObs___returnValue___: Se deben obtener medicos', () => {
     const fakeResp = [
       {
@@ -85,10 +89,6 @@ describe('MedicosComponent', () => {
     componente.obtenerMedicosObs();
     expect(componente.medicos.length).toBeGreaterThan(0);
   });
-
-  /*
-    Pruebas de subscripción a servicio usando returnValue
-  */
 
   it('getMedicosObs_error___returnValue___: Se debe actualizar el mensaje error si el servicio falla', () => {
     const fakeError = 'Ha ocurrido un error';
