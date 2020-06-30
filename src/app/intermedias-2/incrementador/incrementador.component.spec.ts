@@ -49,4 +49,24 @@ describe('Incremendator Component', () => {
     expect(component.progreso).toBe(50);
   });
 
+  it('Debe decrementar el valor del progreso a 45', async(() => {
+    const botones = fixture.debugElement.queryAll(By.css('.btn-primary'));
+    botones[0].triggerEventHandler('click', null);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      const elem: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement;
+      expect(elem.innerHTML).toContain('45');
+    });
+  }));
+
+  it('Debe incrementar el valor del progreso a 55', async(() => {
+    const botones = fixture.debugElement.queryAll(By.css('.btn-primary'));
+    botones[1].triggerEventHandler('click', null);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      const elem: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement;
+      expect(elem.innerHTML).toContain('55');
+    });
+  }));
+
 });
