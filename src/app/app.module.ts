@@ -4,13 +4,15 @@ import { AppComponent } from './app.component';
 import { MedicosComponent } from './intermedias/espias/medicos.component';
 import { MedicoComponent } from './intermedias-2/medico/medico.component';
 import { HospitalComponent } from './intermedias-2/hospital/hospital.component';
+import { IncrementadorComponent } from './intermedias-2/incrementador/incrementador.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MedicosComponent,
     MedicoComponent,
-    HospitalComponent
+    HospitalComponent,
+    IncrementadorComponent
   ],
   imports: [
     BrowserModule
