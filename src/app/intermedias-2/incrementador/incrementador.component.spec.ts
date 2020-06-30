@@ -37,9 +37,16 @@ describe('Incremendator Component', () => {
     fixture.detectChanges(); // ejecutamos el ciclo de detección de cambios
     fixture.whenStable().then(() => { // fixture.whenStable nos permite esperar a que fixture.detectChanges termine de ejecutarse
       const input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-      console.log(input);
       expect(input.value).toBe('55');
     });
   }));
+
+  it('Debe incrementar/decrementar en 5 con un click en el botón', () => {
+    const botones = fixture.debugElement.queryAll(By.css('.btn-primary')); // queryAll, usamos queryAll para obtener todos los valores que cohincidan con el valor especificado
+    botones[0].triggerEventHandler('click', null);
+    expect(component.progreso).toBe(45);
+    botones[1].triggerEventHandler('click', null);
+    expect(component.progreso).toBe(50);
+  });
 
 });
