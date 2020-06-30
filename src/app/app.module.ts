@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MedicosComponent } from './intermedias/espias/medicos.component';
 import { MedicoComponent } from './intermedias-2/medico/medico.component';
+import { HospitalComponent } from './intermedias-2/hospital/hospital.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MedicosComponent,
-    MedicoComponent
+    MedicoComponent,
+    HospitalComponent
   ],
   imports: [
     BrowserModule
